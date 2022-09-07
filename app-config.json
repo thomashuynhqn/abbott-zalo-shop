@@ -1,0 +1,16 @@
+{
+  "app": {
+    "title": "Coffee Shop",
+    "orientation": "auto",
+    "textColor": "white",
+    "leftButton": "both"
+  },
+  "debug": false,
+  "listCSS": [],
+  "listSyncJS": [],
+  "listAsyncJS": [],
+  "pages": [
+    "/discount",
+    "/history"
+  ]
+}
