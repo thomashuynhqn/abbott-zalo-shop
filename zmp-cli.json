@@ -1,7 +1,7 @@
 {
-  "cwd": "/Users/nguyenhongphat0/Desktop/zalo",
+  "cwd": "C:/Projects/abbott-shop",
   "newProject": true,
-  "name": "Coffee Shop",
+  "name": "Gian Hàng Abbott Chính Hãng",
   "framework": "react",
   "template": "single-view",
   "cssPreProcessor": "scss",

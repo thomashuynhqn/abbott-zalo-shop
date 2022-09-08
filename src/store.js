@@ -31,7 +31,7 @@ const store = createStore({
     shops: [
       {
         selected: true,
-        name: "VNG Campus D7",
+        name: "Gian hàng chính hãng Abbott",
         address:
           "Lô Z.06 - Đường số 13, KCX Tân Thuận, P. Tân Thuận Đông, Q.7, TP Hồ Chí Minh.",
         open: { hour: 8, minute: 0 },
