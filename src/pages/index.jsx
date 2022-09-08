@@ -8,8 +8,6 @@ import ProductList from "../components/product-list";
 const HomePage = () => {
   return (
     <Page name="home">
-      <Heading />
-      <Banner />
       <Inquiry />
       <ProductList />
     </Page>
