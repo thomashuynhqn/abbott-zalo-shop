@@ -107,7 +107,7 @@ const ProductOrder = ({ product, children, cartItem, cartIndex }) => {
         onSheetClosed={() => setShowOrder(false)}
         backdrop
         closeButton
-        title="Chọn thức uống"
+        title="Chọn Sữa"
       >
         <Box className="bg-white product-preview">
           <Row>
@@ -119,10 +119,24 @@ const ProductOrder = ({ product, children, cartItem, cartIndex }) => {
               <Price amount={price} />
             </Col>
           </Row>
+          <Row>
+            Contrary to popular belief, Lorem Ipsum is not simply random text.
+            It has roots in a piece of classical Latin literature from 45 BC,
+            making it over 2000 years old. Richard McClintock, a Latin professor
+            at Hampden-Sydney College in Virginia, looked up one of the more
+            obscure Latin words, consectetur, from a Lorem Ipsum passage, and
+            going through the cites of the word in classical literature,
+            discovered the undoubtable source. Lorem Ipsum comes from sections
+            1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes
+            of Good and Evil) by Cicero, written in 45 BC. This book is a
+            treatise on the theory of ethics, very popular during the
+            Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit
+            amet..", comes from a line in section 1.10.32.
+          </Row>
         </Box>
         <Box m={0} p={0} textAlign="left">
           <Box className="section-label">
-            <Text bold>Chọn Size</Text>
+            <Text bold>Chọn hương vị</Text>
           </Box>
           <List className="my-0">
             {sizes.map((s) => (
