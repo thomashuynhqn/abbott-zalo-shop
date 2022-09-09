@@ -9,7 +9,7 @@ import {
   zmp,
 } from "zmp-framework/react";
 import { Price } from "./prices";
-import milk from "../static/icons/cup.svg";
+import milk from "../static/icons/milk.svg";
 import discount from "../static/icons/discount.svg";
 import history from "../static/icons/history.svg";
 import Checkout from "./checkout";
