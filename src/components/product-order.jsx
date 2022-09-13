@@ -22,7 +22,6 @@ const ProductOrder = ({ product, children, cartItem, cartIndex }) => {
   const [showOrder, setShowOrder] = useState(false);
   const [quantity, setQuantity] = useState(1);
   const [size, setSize] = useState(sizes[0]);
-
   const [note, setNote] = useState("");
 
   useEffect(() => {

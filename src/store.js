@@ -22,7 +22,7 @@ const store = createStore({
     user: null,
     showCheckout: false,
     shipping: false,
-    categories: ["Ensure Gold", "Glucerna", "PediaSure"],
+    categories: ["Tất cả sản phẩm", "Ensure Gold", "Glucerna", "PediaSure"],
     loadingProducts: true,
     products: [],
     loadingOrders: true,
