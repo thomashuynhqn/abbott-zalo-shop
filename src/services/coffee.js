@@ -56,11 +56,35 @@ export const getProductsByCategory = async () => {
   }
 };
 
-export const getProductsByCombo = async (_id) => {
+export const getProductsEns = async (_id) => {
   try {
     const response = await (await request("GET", "products")).json();
     return response.data.filter(function (el) {
       return el._id == "Ensure Gold";
+    });
+  } catch (error) {
+    console.log("Error fetching products. Details: ", error);
+    return [];
+  }
+};
+
+export const getProductsGlu = async (_id) => {
+  try {
+    const response = await (await request("GET", "products")).json();
+    return response.data.filter(function (el) {
+      return el._id == "Glucerna";
+    });
+  } catch (error) {
+    console.log("Error fetching products. Details: ", error);
+    return [];
+  }
+};
+
+export const getProductsPed = async (_name) => {
+  try {
+    const response = await (await request("GET", "products")).json();
+    return response.data.filter(function (el) {
+      return el._id == "PediaSure";
     });
   } catch (error) {
     console.log("Error fetching products. Details: ", error);
