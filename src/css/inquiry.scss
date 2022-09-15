@@ -1,5 +1,6 @@
 .inquiry {
   display: flex;
+  flex-direction: column;
   select,
   .button {
     background-color: white;
