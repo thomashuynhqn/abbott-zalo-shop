@@ -128,6 +128,20 @@ const AddressPicker = ({ onBack }) => {
               </ListItem>
               <ListItem className="editable-info">
                 <Box slot="root-start" className="label">
+                  Số điện thoại
+                </Box>
+                <Avatar slot="media" src={phoneIcon} size="24" />
+                <div className="inline-input">
+                  <Input
+                    type="text"
+                    placeholder="Nhập số điện thoại..."
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
+                  />
+                </div>
+              </ListItem>
+              <ListItem className="editable-info">
+                <Box slot="root-start" className="label">
                   Địa chỉ
                 </Box>
                 <Icon slot="media" zmp="zi-location-solid" size="24" />
@@ -138,20 +152,6 @@ const AddressPicker = ({ onBack }) => {
                     resizable
                     value={address}
                     onChange={(e) => setAddress(e.target.value)}
-                  />
-                </div>
-              </ListItem>
-              <ListItem className="editable-info">
-                <Box slot="root-start" className="label">
-                  Số điện thoại
-                </Box>
-                <Avatar slot="media" src={phoneIcon} size="24" />
-                <div className="inline-input">
-                  <Input
-                    type="text"
-                    placeholder="Nhập số điện thoại..."
-                    value={phone}
-                    onChange={(e) => setPhone(e.target.value)}
                   />
                 </div>
               </ListItem>

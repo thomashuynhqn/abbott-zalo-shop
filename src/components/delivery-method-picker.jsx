@@ -83,26 +83,6 @@ const DeliveryMethodPicker = ({ children, onReturn, onOpen }) => {
             </ActionsGroup>
             <ActionsGroup>
               <ActionsButton
-                className={shipping ? "inactive" : "active"}
-                onClick={() => store.dispatch("ship", false)}
-              >
-                <Avatar src={pickup} />
-                <div className="description mr-2">
-                  <Text bold fontSize="16" className="text-primary my-1">
-                    Tự đến lấy
-                  </Text>
-                  <Text className="text-secondary ellipsis">
-                    {selectedShop.name} - {selectedShop.address}
-                  </Text>
-                </div>
-                <Button
-                  typeName="secondary"
-                  onClick={(e) => showDetail(e, false)}
-                >
-                  Sửa
-                </Button>
-              </ActionsButton>
-              <ActionsButton
                 className={shipping ? "active" : "inactive"}
                 onClick={handleShipping}
                 close={false}

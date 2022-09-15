@@ -126,20 +126,6 @@ const Checkout = ({ children, onReturn }) => {
           Thông tin khách hàng
         </Text>
         <List className="my-0">
-          <ListItem className="shipping-time">
-            <Box slot="root-start" className="label">
-              Thời gian nhận hàng
-            </Box>
-            <Avatar slot="media" src={clockIcon} size="24" />
-            <Icon slot="content" zmp="zi-chevron-right" />
-            <ShippingTimePicker
-              value={shippingTime}
-              onChange={(value) => store.dispatch("setShippingTime", value)}
-              placeholder="Thời gian nhận hàng"
-              title="Thời gian nhận hàng"
-              className="flex-1"
-            />
-          </ListItem>
           <ListItem className="editable-info">
             <Box slot="root-start" className="label">
               Ghi chú
@@ -238,30 +224,6 @@ const Checkout = ({ children, onReturn }) => {
             </ListItem>
             <ListItem>
               <div className="flex-1">
-                <Box className="d-flex v-center">
-                  <Checkbox
-                    checked={aggree}
-                    onChange={(e) => setAggree(e.target.checked)}
-                    label={
-                      <Text className="text-left mb-0" fontSize={12}>
-                        Tôi đồng ý nhận món từ{" "}
-                        <b>
-                          {shippingTime[1]}h
-                          {`${shippingTime[2]}`.padStart(2, 0)} -{" "}
-                          {Number(shippingTime[1]) + 1}h
-                          {`${shippingTime[2]}`.padStart(2, 0)}
-                        </b>
-                        .{" "}
-                        <a
-                          onClick={changeShippingTime}
-                          className="text-primary d-inline"
-                        >
-                          Chọn giờ khác.
-                        </a>
-                      </Text>
-                    }
-                  />
-                </Box>
                 <Box className="d-flex v-center space-between">
                   <Text>Tổng tiền</Text>
                   <Price fontSize={20} bold amount={totalAmount} />
@@ -275,7 +237,7 @@ const Checkout = ({ children, onReturn }) => {
                     disabled={loading || !aggree}
                   >
                     {loading && <Preloader className="loading-button" />}
-                    Thanh toán bằng ZaloPay
+                    Thanh toán
                   </Button>
                 </Box>
               </div>

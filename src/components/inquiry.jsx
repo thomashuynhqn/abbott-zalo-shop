@@ -5,12 +5,20 @@ import "../css/inquiry.scss";
 const Inquiry = () => {
   const categories = useStore("categories");
 
+  function handleCategoryChange(event) {
+    setSelectedCategory(event.target.value);
+  }
+
   return (
     <Box className="inquiry" px="2">
       <div className="flex-1 pr-4">
         <Input type="select">
           {categories.map((category) => (
-            <option key={category} value={category}>
+            <option
+              key={category}
+              value={category}
+              onChange={handleCategoryChange}
+            >
               {category}
             </option>
           ))}

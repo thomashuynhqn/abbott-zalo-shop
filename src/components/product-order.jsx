@@ -173,7 +173,7 @@ const ProductOrder = ({ product, children, cartItem, cartIndex }) => {
                   value={note}
                   onChange={(e) => setNote(e.target.value)}
                   type="text"
-                  placeholder="Nhập ghi chú (VD. Ít đá, nhiều đường...)"
+                  placeholder="Nhập ghi chú..."
                 />
               </div>
             </ListItem>
