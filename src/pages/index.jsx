@@ -9,7 +9,7 @@ const HomePage = () => {
   return (
     <Page name="home">
       <Inquiry />
-      <ProductList />
+    
     </Page>
   );
 };
