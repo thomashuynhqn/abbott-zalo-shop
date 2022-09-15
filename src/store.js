@@ -5,6 +5,7 @@ import {
   getCurrentUser,
   getPlacedOrders,
   getProductsByCategory,
+  getProductsByCombo,
   login,
 } from "./services/coffee";
 import {

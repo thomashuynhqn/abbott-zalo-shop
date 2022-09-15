@@ -56,6 +56,18 @@ export const getProductsByCategory = async () => {
   }
 };
 
+export const getProductsByCombo = async (_id) => {
+  try {
+    const response = await (await request("GET", "products")).json();
+    return response.data.filter(function (el) {
+      return el._id == "Ensure Gold";
+    });
+  } catch (error) {
+    console.log("Error fetching products. Details: ", error);
+    return [];
+  }
+};
+
 export const updateFollowStatus = async (status) => {
   try {
     const response = await request("POST", "users/followed", { status });

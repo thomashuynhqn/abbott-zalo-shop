@@ -8,8 +8,10 @@ const Product = (props) => {
   return (
     <ProductOrder product={props}>
       <Card inset className="text-center">
-        <img src={image} className="w-100" />
-        <Text bold>{name}</Text>
+        <img src={image} className="w-100 h-personal" />
+        <Text bold className="h-text p-text none-m">
+          {name}
+        </Text>
         <Price className="text-secondary" amount={price} />
       </Card>
     </ProductOrder>
