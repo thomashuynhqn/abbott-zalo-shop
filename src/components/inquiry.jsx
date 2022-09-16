@@ -1,6 +1,7 @@
 import React, { useState, useMemo, useEffect } from "react";
 import { Box, Input, Button, Icon, useStore } from "zmp-framework/react";
 import ProductList from "./product-list";
+import store from "../store";
 import "../css/inquiry.scss";
 
 const Inquiry = () => {
@@ -13,6 +14,10 @@ const Inquiry = () => {
   useEffect(() => {
     setItemList(productList);
   });
+
+  useEffect(() => {
+    store.dispatch("fetchProducts");
+  }, []);
 
   function filterProducts() {
     if (!selectedCategory) {
