@@ -1,13 +1,18 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import { Box, Input, Button, Icon, useStore } from "zmp-framework/react";
 import ProductList from "./product-list";
 import "../css/inquiry.scss";
 
 const Inquiry = () => {
   const categories = useStore("categories");
-  const itemList = useStore("products");
+  const productList = useStore("products");
 
+  const [itemList, setItemList] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState();
+
+  useEffect(() => {
+    setItemList(productList);
+  });
 
   function filterProducts() {
     if (!selectedCategory) {
@@ -24,7 +29,7 @@ const Inquiry = () => {
 
   return (
     <Box className="inquiry" px="2">
-      <div className="flex-2 pr-4">
+      <div className="flex-1 pr-4">
         <Input type="select">
           {categories.map((category) => (
             <option
@@ -37,10 +42,9 @@ const Inquiry = () => {
           ))}
         </Input>
       </div>
-
       <div className="product-row">
-        {filteredList.map((element, index) => (
-          <ProductList {...element} key={index} />
+        {filteredList.map((index) => (
+          <ProductList key={index._id} />
         ))}
       </div>
     </Box>

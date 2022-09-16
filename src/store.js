@@ -5,9 +5,6 @@ import {
   getCurrentUser,
   getPlacedOrders,
   getProductsByCategory,
-  getProductsEns,
-  getProductsPed,
-  getProductsGlu,
   login,
 } from "./services/coffee";
 import {
@@ -232,45 +229,6 @@ const store = createStore({
       const products = await getProductsByCategory();
       state.products = products;
       saveProductsToCache(products);
-      state.loadingProducts = false;
-    },
-    async fetchEns({ state }) {
-      state.loadingProducts = true;
-      const cachedProducts = await loadProductsFromCache();
-      if (cachedProducts.length) {
-        state.products = cachedProducts;
-        state.loadingProducts = false;
-      }
-
-      const ensure = await getProductsEns();
-      state.products = ensure;
-      saveProductsToCache(ensure);
-      state.loadingProducts = false;
-    },
-    async fetchGlu({ state }) {
-      state.loadingProducts = true;
-      const cachedProducts = await loadProductsFromCache();
-      if (cachedProducts.length) {
-        state.products = cachedProducts;
-        state.loadingProducts = false;
-      }
-
-      const glucerna = await getProductsGlu();
-      state.products = glucerna;
-      saveProductsToCache(glucerna);
-      state.loadingProducts = false;
-    },
-    async fetchPed({ state }) {
-      state.loadingProducts = true;
-      const cachedProducts = await loadProductsFromCache();
-      if (cachedProducts.length) {
-        state.products = cachedProducts;
-        state.loadingProducts = false;
-      }
-
-      const pediasure = await getProductsPed();
-      state.products = pediasure;
-      saveProductsToCache(pediasure);
       state.loadingProducts = false;
     },
     async fetchOrders({ state }) {

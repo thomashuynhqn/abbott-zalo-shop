@@ -14,6 +14,7 @@ import "../css/product.scss";
 const ProductList = () => {
   const loading = useStore("loadingProducts");
   const productGroups = useStore("products");
+
   useEffect(() => {
     store.dispatch("fetchProducts");
   }, []);
