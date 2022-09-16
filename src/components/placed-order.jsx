@@ -18,7 +18,7 @@ const PlacedOrder = ({ order }) => {
       <img className="discount-image" src={cart[0].product.image} />
       <div className="discount-summary">
         <Text className="text-secondary">
-          {new Date(createdAt).toLocaleDateString()} -{" "}
+          {new Date(createdAt).toLocaleDateString()} - {" "}
           {new Date(createdAt).toLocaleTimeString()}
         </Text>
         {shipping ? (

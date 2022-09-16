@@ -36,7 +36,7 @@ const ProductList = () => {
         <>
           {productGroups.map(({ _id: groupName, products }) => (
             <Box key={groupName} m={0}>
-              <Title className="px-4 pb-2" bold>
+              <Title className="none-m m-auto p-text" bold>
                 {groupName}
               </Title>
               <Box className="product-row">

@@ -32,35 +32,7 @@ const store = createStore({
       {
         selected: true,
         name: "Gian hàng chính hãng Abbott",
-        address:
-          "Lô Z.06 - Đường số 13, KCX Tân Thuận, P. Tân Thuận Đông, Q.7, TP Hồ Chí Minh.",
-        open: { hour: 8, minute: 0 },
-        close: { hour: 17, minute: 0 },
-      },
-      {
-        name: "210 Nguyễn Trãi",
-        address:
-          "210 Nguyễn Trãi, Phường Phạm Ngũ Lão, Quận 1, Thành phố Hồ Chí Minh",
-        open: { hour: 8, minute: 0 },
-        close: { hour: 17, minute: 0 },
-      },
-      {
-        name: "Opera House",
-        address:
-          "07 Công Trường Lam Sơn, Bến Nghé, Quận 1, Thành phố Hồ Chí Minh",
-        open: { hour: 8, minute: 0 },
-        close: { hour: 17, minute: 0 },
-      },
-      {
-        name: "Sài Gòn Tower",
-        address: "29 Lê Duẩn, Bến Nghé, Quận 1, Thành phố Hồ Chí Minh",
-        open: { hour: 8, minute: 0 },
-        close: { hour: 17, minute: 0 },
-      },
-      {
-        name: "Sala 2",
-        address:
-          "125 Nguyễn Cơ Thạch, An Lợi Đông, Quận 2, Thành phố Hồ Chí Minh",
+        address: "",
         open: { hour: 8, minute: 0 },
         close: { hour: 17, minute: 0 },
       },
@@ -75,13 +47,13 @@ const store = createStore({
       },
       {
         code: "GIAM35%",
-        name: "Giảm 35% cho đơn hàng từ 5 món, tối đa 59K...",
+        name: "Giảm 35% cho đơn hàng từ 5 món",
         expireDate: "10/05/2021",
         image: "discount-2",
       },
       {
         code: "GIAM30K",
-        name: "Ưu đãi 30K cho đơn hàng 149K - Áp dụng cho dịch ...",
+        name: "Ưu đãi 30K cho đơn hàng 149K",
         expireDate: "10/05/2021",
         image: "discount-3",
       },
