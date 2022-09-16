@@ -5,22 +5,28 @@ import store from "../store";
 import "../css/inquiry.scss";
 
 const Inquiry = () => {
+  const categories = useStore("categories");
   const productList = useStore("products");
 
+  const [itemList, setItemList] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState();
 
   useEffect(() => {
+    setItemList(productList);
+  });
+
+  useEffect(() => {
     store.dispatch("fetchProducts");
-  }, [selectedCategory]);
+  }, []);
 
   function filterProducts() {
     if (!selectedCategory) {
-      return productList;
+      return itemList;
     }
-    return productList.filter((item) => item._id === selectedCategory);
+    return itemList.filter((item) => item.category === selectedCategory);
   }
 
-  let filteredList = useMemo(filterProducts, [selectedCategory, productList]);
+  let filteredList = useMemo(filterProducts, [selectedCategory, itemList]);
 
   function handleCategoryChange(event) {
     setSelectedCategory(event.target.value);
@@ -30,16 +36,20 @@ const Inquiry = () => {
     <Box className="inquiry" px="2">
       <div className="flex-1 pr-4">
         <Input type="select">
-          {filteredList.map(({ _id: name }) => (
-            <option key={name} value={name} onChange={handleCategoryChange}>
-              {name}
+          {categories.map((category) => (
+            <option
+              key={category}
+              value={category}
+              onChange={handleCategoryChange}
+            >
+              {category}
             </option>
           ))}
         </Input>
       </div>
       <div className="product-row">
-        {filteredList.map(({ _id: name }) => (
-          <ProductList {...name} key={name} value={name} />
+        {filteredList.map((index) => (
+          <ProductList key={index._id} />
         ))}
       </div>
     </Box>
