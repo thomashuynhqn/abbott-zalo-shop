@@ -8,12 +8,7 @@ const Inquiry = () => {
   const categories = useStore("categories");
   const productList = useStore("products");
 
-  const [itemList, setItemList] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState();
-
-  useEffect(() => {
-    setItemList(productList);
-  });
+  const [selectedCategory, setSelectedCategory] = useState([]);
 
   useEffect(() => {
     store.dispatch("fetchProducts");
@@ -21,12 +16,13 @@ const Inquiry = () => {
 
   function filterProducts() {
     if (!selectedCategory) {
-      return itemList;
+      return productList;
     }
-    return itemList.filter((item) => item.category === selectedCategory);
+    return productList.filter((item) => item.category === selectedCategory);
   }
+  console.log(productList);
 
-  let filteredList = useMemo(filterProducts, [selectedCategory, itemList]);
+  let filteredList = useMemo(filterProducts, [selectedCategory, productList]);
 
   function handleCategoryChange(event) {
     setSelectedCategory(event.target.value);
@@ -36,13 +32,13 @@ const Inquiry = () => {
     <Box className="inquiry" px="2">
       <div className="flex-1 pr-4">
         <Input type="select">
-          {categories.map((category) => (
+          {filteredList.map((cate) => (
             <option
-              key={category}
-              value={category}
+              key={cate.category}
+              value={cate}
               onChange={handleCategoryChange}
             >
-              {category}
+              {cate}
             </option>
           ))}
         </Input>
