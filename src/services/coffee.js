@@ -56,14 +56,15 @@ export const getProductsByCategory = async () => {
   }
 };
 
-export const updateFollowStatus = async (status) => {
+export const getProductsByEnsure = async (category) => {
   try {
-    const response = await request("POST", "users/followed", { status });
-    const data = await response.json();
-    return data;
+    const response = await (await request("GET", "products")).json();
+    return response.data.filter(function (item) {
+      return (item.category = category);
+    });
   } catch (error) {
-    console.log("Error update follow OA status. Details: ", error);
-    return false;
+    console.log("Error fetching products. Details: ", error);
+    return [];
   }
 };
 
