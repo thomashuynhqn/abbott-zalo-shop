@@ -1,6 +1,7 @@
 import React, { useState, useMemo, useEffect } from "react";
 import { Box, Input, Button, Icon, Col, useStore } from "zmp-framework/react";
 import ProductList from "./product-list";
+import Product from "./product";
 import store from "../store";
 import "../css/inquiry.scss";
 
@@ -29,6 +30,8 @@ const Inquiry = () => {
   function handleCategoryChange(event) {
     setSelectedCategory(event.target.value);
   }
+
+  console.log(store.state.products);
 
   return (
     <Box className="inquiry" px="2">

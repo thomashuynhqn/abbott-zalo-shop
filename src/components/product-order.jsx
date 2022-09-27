@@ -18,16 +18,16 @@ import store from "../store";
 import "../css/product-order.scss";
 
 const ProductOrder = ({ product, children, cartItem, cartIndex }) => {
-  const { name, price, image, sizes, description } = product;
+  const { name, price, image, flavor, description } = product;
   const [showOrder, setShowOrder] = useState(false);
   const [quantity, setQuantity] = useState(1);
-  const [size, setSize] = useState(sizes[0]);
+  const [flavors, setFlavors] = useState(flavor[0]);
   const [note, setNote] = useState("");
 
   useEffect(() => {
     if (cartItem) {
       setQuantity(cartItem.quantity);
-      setSize(cartItem.size);
+      setFlavors(cartItem.flavors);
       setNote(cartItem.note);
     }
   }, [showOrder]);
@@ -42,17 +42,17 @@ const ProductOrder = ({ product, children, cartItem, cartIndex }) => {
 
   const subtotal = useMemo(() => {
     let subtotal = price;
-    if (size) {
-      subtotal += size.extra;
+    if (flavors) {
+      subtotal += flavors.extra;
     }
     subtotal *= quantity;
     return subtotal;
-  }, [quantity, size]);
+  }, [quantity, flavors]);
 
   const order = () => {
     const item = {
       quantity,
-      size,
+      flavors,
       subtotal,
       note,
       product,
@@ -127,15 +127,15 @@ const ProductOrder = ({ product, children, cartItem, cartIndex }) => {
             <Text bold>Chọn hương vị</Text>
           </Box>
           <List className="my-0">
-            {sizes.map((s) => (
+            {flavor.map((s) => (
               <ListItem
                 key={s.name}
                 radio
                 value={s.name}
-                name="s"
+                name="flavor"
                 title={s.name}
-                checked={size === s}
-                onClick={() => setSize(s)}
+                checked={flavors === s}
+                onClick={() => setFlavors(s)}
               >
                 {s.extra && <ExtraPrice amount={s.extra} />}
               </ListItem>
