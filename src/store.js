@@ -6,7 +6,7 @@ import {
   getPlacedOrders,
   getProductsByCategory,
   login,
-} from "./services/coffee";
+} from "./services/abbott-product";
 import {
   loadAddresses,
   loadProductsFromCache,
