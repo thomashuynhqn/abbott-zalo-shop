@@ -2,15 +2,13 @@ import React, { useState, useMemo, useEffect } from "react";
 import {
   Box,
   Input,
-  Button,
-  Icon,
   Col,
   Title,
   Row,
   SkeletonBlock,
   useStore,
 } from "zmp-framework/react";
-import ProductList from "./product-list";
+
 import store from "../store";
 import Product from "./product";
 
@@ -20,7 +18,10 @@ import "../css/product.scss";
 const Inquiry = () => {
   const [itemList, setItemList] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState();
+
+  const loading = useStore("loadingProducts");
   const itemApi = useStore("products");
+
   useEffect(() => {
     store.dispatch("fetchProducts");
   }, []);
@@ -51,28 +52,43 @@ const Inquiry = () => {
           <option value="Glucerna">Glucerna</option>
         </Input>
       </div>
-      {filteredList.map(({ _id: groupName, products }) => (
-        <Box key={groupName} m={0}>
-          <Title className="none-m m-auto p-text" bold>
-            {groupName}
-          </Title>
-          <Box className="product-row">
-            <Row
-              style={{
-                width: `calc(${products.length * 50}vw - ${
-                  products.length * 20
-                }px + ${(products.length - 1) * 8}px)`,
-              }}
-            >
-              {products.map((product) => (
-                <Col key={product._id} className="product-column">
-                  <Product {...product} />
-                </Col>
-              ))}
-            </Row>
-          </Box>
+      {loading ? (
+        <Box m={0} px={4} pb={2}>
+          <Row gap="gap_4" className="mt-4">
+            <Col>
+              <SkeletonBlock effect="wave" height="200px" />
+            </Col>
+            <Col>
+              <SkeletonBlock effect="wave" height="200px" />
+            </Col>
+          </Row>
         </Box>
-      ))}
+      ) : (
+        <>
+          {filteredList.map(({ _id: groupName, products }) => (
+            <Box key={groupName} m={0}>
+              <Title className="none-m m-auto p-text" bold>
+                {groupName}
+              </Title>
+              <Box className="product-row">
+                <Row
+                  style={{
+                    width: `calc(${products.length * 50}vw - ${
+                      products.length * 20
+                    }px + ${(products.length - 1) * 8}px)`,
+                  }}
+                >
+                  {products.map((product) => (
+                    <Col key={product._id} className="product-column">
+                      <Product {...product} />
+                    </Col>
+                  ))}
+                </Row>
+              </Box>
+            </Box>
+          ))}
+        </>
+      )}
     </Box>
   );
 };
