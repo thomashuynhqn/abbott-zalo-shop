@@ -18,11 +18,9 @@ import "../css/inquiry.scss";
 import "../css/product.scss";
 
 const Inquiry = () => {
-  const itemApi = useStore("products");
-
   const [itemList, setItemList] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState();
-
+  const itemApi = useStore("products");
   useEffect(() => {
     store.dispatch("fetchProducts");
   }, []);
@@ -35,7 +33,7 @@ const Inquiry = () => {
     if (!selectedCategory) {
       return itemList;
     }
-    return itemList.filter((product) => product.category === selectedCategory);
+    return itemList.filter((product) => product._id === selectedCategory);
   }
 
   const filteredList = useMemo(getFilteredList, [selectedCategory, itemList]);
