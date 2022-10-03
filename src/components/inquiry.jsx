@@ -21,6 +21,7 @@ const Inquiry = () => {
 
   const loading = useStore("loadingProducts");
   const itemApi = useStore("products");
+  const categories = useStore("categories");
 
   useEffect(() => {
     store.dispatch("fetchProducts");
@@ -28,7 +29,7 @@ const Inquiry = () => {
 
   useEffect(() => {
     setItemList(itemApi);
-  }, []);
+  }, [categories]);
 
   function getFilteredList() {
     if (!selectedCategory) {
@@ -47,9 +48,11 @@ const Inquiry = () => {
     <Box className="inquiry" px="2">
       <div className="flex-1 pr-4">
         <Input type="select" onChange={handleCategoryChange}>
-          <option value="">All</option>
-          <option value="Ensure Gold">Ensure Gold</option>
-          <option value="Glucerna">Glucerna</option>
+          {categories.map((category) => (
+            <option key={category.value} value={category.value}>
+              {category.title}
+            </option>
+          ))}
         </Input>
       </div>
       {loading ? (

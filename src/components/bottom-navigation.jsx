@@ -9,7 +9,7 @@ import {
   zmp,
 } from "zmp-framework/react";
 import { Price } from "./prices";
-import milk from "../static/icons/milk.svg";
+import cup from "../static/icons/cup.svg";
 import discount from "../static/icons/discount.svg";
 import history from "../static/icons/history.svg";
 import Checkout from "./checkout";
@@ -25,7 +25,7 @@ const BottomNavigation = () => {
   });
 
   const links = [
-    { name: "Đặt Sữa", href: "/", icon : "zi-home" },
+    { name: "Đặt Sữa", href: "/", icon: cup },
     { name: "Ưu đãi", href: "/discount", icon: discount },
     { name: "Lịch sử", href: "/history", icon: history },
   ];

@@ -19,10 +19,23 @@ import { follow, getAccessToken } from "./services/zalo";
 const store = createStore({
   state: {
     jwt: null,
-    user: null,
+    user: [],
     showCheckout: false,
     shipping: false,
-    categories: ["Tất cả sản phẩm", "Ensure Gold", "Glucerna", "PediaSure"],
+    categories: [
+      {
+        value: "",
+        title: "Tất cả sản phẩm",
+      },
+      {
+        value: "Ensure Gold",
+        title: "Ensure Gold",
+      },
+      {
+        value: "Glucerna",
+        title: "Glucerna",
+      },
+    ],
     loadingProducts: true,
     products: [],
     loadingOrders: true,
