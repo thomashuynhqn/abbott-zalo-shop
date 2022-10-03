@@ -20,7 +20,7 @@ export const request = async (method, url, data) => {
 export const login = async (accessToken) => {
   try {
     const response = await (
-      await request("POST", "users/login", {
+      await request("POST", "user", {
         accessToken,
       })
     ).json();
@@ -38,7 +38,7 @@ export const login = async (accessToken) => {
 
 export const getCurrentUser = async () => {
   try {
-    const response = await (await request("GET", "users/logged-in")).json();
+    const response = await (await request("GET", "user")).json();
     return response.data;
   } catch (error) {
     console.log("Error get current user info. Details: ", error);
@@ -50,18 +50,6 @@ export const getProductsByCategory = async () => {
   try {
     const response = await (await request("GET", "products")).json();
     return response.data;
-  } catch (error) {
-    console.log("Error fetching products. Details: ", error);
-    return [];
-  }
-};
-
-export const getProductsByEnsure = async (category) => {
-  try {
-    const response = await (await request("GET", "products")).json();
-    return response.data.filter(function (item) {
-      return (item.category = category);
-    });
   } catch (error) {
     console.log("Error fetching products. Details: ", error);
     return [];
