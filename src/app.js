@@ -1,6 +1,7 @@
 // Import React and ReactDOM
 import React from "react";
-import ReactDOM from "react-dom";
+
+import { createRoot } from "react-dom/client";
 
 // Import ZMP
 import ZMP from "zmp-framework/core/lite-bundle";
@@ -27,4 +28,4 @@ if (!window.APP_CONFIG) {
 ZMP.use(ZMPReact);
 
 // Mount React App
-ReactDOM.render(React.createElement(App), document.getElementById("app"));
+createRoot(document.getElementById("app")).render(React.createElement(App));
