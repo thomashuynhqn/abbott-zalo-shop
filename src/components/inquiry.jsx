@@ -28,7 +28,7 @@ const Inquiry = () => {
 
   useEffect(() => {
     setItemList(itemApi);
-  }, []);
+  }, [itemApi, categories]);
 
   function getFilteredList() {
     if (!selectedCategory) {
