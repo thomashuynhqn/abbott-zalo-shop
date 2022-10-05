@@ -36,16 +36,6 @@ export const login = async (accessToken) => {
   }
 };
 
-export const getCurrentUser = async () => {
-  try {
-    const response = await (await request("GET", "user")).json();
-    return response.data;
-  } catch (error) {
-    console.log("Error get current user info. Details: ", error);
-    return null;
-  }
-};
-
 export const getProductsByCategory = async () => {
   try {
     const response = await (await request("GET", "products")).json();

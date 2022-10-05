@@ -1,6 +1,9 @@
 import React from "react";
+import { useEffect } from "react";
 import { zmpready, App, View } from "zmp-framework/react";
 import store from "../store";
+import api from "zmp-sdk";
+import { getUser } from "../services/zalo";
 import BottomNavigation from "./bottom-navigation";
 
 const MyApp = () => {
@@ -16,6 +19,15 @@ const MyApp = () => {
     // Call ZMP APIs here
     store.dispatch("login");
   });
+
+  const init = async () => {
+    await api.login();
+    getUser();
+  };
+
+  useEffect(() => {
+    init();
+  }, []);
 
   return (
     <App {...zmpparams}>

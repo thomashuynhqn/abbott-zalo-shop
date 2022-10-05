@@ -1,7 +1,20 @@
 import { zmp } from "zmp-framework/react";
+import { zmpready } from "zmp-framework/react";
 import api from "zmp-sdk";
 import config from "../config";
 import store from "../store";
+
+export const getUser = () =>
+  new Promise((resolve) => {
+    api.getUserInfo({
+      avatarType: "small",
+      success: ({ userInfo }) => {
+        zmpready(() => {
+          store.dispatch("setUser", userInfo).then(resolve);
+        });
+      },
+    });
+  });
 
 export const getAccessToken = () =>
   new Promise((resolve) => {

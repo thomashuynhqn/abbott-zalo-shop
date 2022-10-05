@@ -1,8 +1,8 @@
 import { createStore } from "zmp-core/lite";
+
 import { zmp } from "zmp-framework/react";
 import {
   checkout,
-  getCurrentUser,
   getPlacedOrders,
   getProductsByCategory,
   login,
@@ -19,7 +19,13 @@ import { follow, getAccessToken } from "./services/zalo";
 const store = createStore({
   state: {
     jwt: null,
-    user: [],
+    user: [
+      {
+        id: "",
+        avatar: "",
+        name: "",
+      },
+    ],
     showCheckout: false,
     shipping: false,
     categories: [
