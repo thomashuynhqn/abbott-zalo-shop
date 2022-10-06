@@ -60,7 +60,7 @@ const Checkout = ({ children, onReturn }) => {
     document.querySelector("#shipping-time-picker").click();
   };
 
-  const [aggree, setAggree] = useState(true);
+  const [agree, setAgree] = useState(true);
 
   return (
     <>
@@ -234,7 +234,7 @@ const Checkout = ({ children, onReturn }) => {
                     large
                     responsive
                     fill
-                    disabled={loading || !aggree}
+                    disabled={loading || !agree}
                   >
                     {loading && <Preloader className="loading-button" />}
                     Thanh toán

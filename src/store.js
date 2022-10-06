@@ -60,21 +60,15 @@ const store = createStore({
     discounts: [
       {
         code: "GIAM20K",
-        name: "Ưu đãi 20K! Đặt Coffee Shop trên Zalo.",
+        name: "Lorem",
         expireDate: "10/05/2021",
         image: "discount-1",
       },
       {
         code: "GIAM35%",
-        name: "Giảm 35% cho đơn hàng từ 5 món",
+        name: "Lorem",
         expireDate: "10/05/2021",
         image: "discount-2",
-      },
-      {
-        code: "GIAM30K",
-        name: "Ưu đãi 30K cho đơn hàng 149K",
-        expireDate: "10/05/2021",
-        image: "discount-3",
       },
     ],
     selectedDiscount: null,

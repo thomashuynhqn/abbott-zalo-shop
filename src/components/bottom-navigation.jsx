@@ -9,7 +9,7 @@ import {
   zmp,
 } from "zmp-framework/react";
 import { Price } from "./prices";
-import cup from "../static/icons/cup.svg";
+import abbottIcon from "../static/icons/abbottIcon.png";
 import discount from "../static/icons/discount.svg";
 import history from "../static/icons/history.svg";
 import Checkout from "./checkout";
@@ -25,7 +25,7 @@ const BottomNavigation = () => {
   });
 
   const links = [
-    { name: "Đặt Sữa", href: "/", icon: cup },
+    { name: "Đặt Sữa", href: "/", icon: abbottIcon },
     { name: "Ưu đãi", href: "/discount", icon: discount },
     { name: "Lịch sử", href: "/history", icon: history },
   ];
@@ -70,7 +70,7 @@ const BottomNavigation = () => {
             className={href === currentPath ? "active" : "inactive"}
             onClick={() => navigateWithoutAnimation(href)}
           >
-            <img src={icon} />
+            <img src={icon} className="icon-img" />
             {name}
           </Link>
         ))}

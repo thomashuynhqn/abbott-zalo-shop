@@ -10,7 +10,7 @@ import {
   Icon,
   useStore,
 } from "zmp-framework/react";
-import pickup from "../static/icons/pickup.svg";
+
 import delivery from "../static/icons/delivery.svg";
 import ShopPicker from "./shop-picker";
 import store from "../store";
@@ -18,7 +18,6 @@ import AddressPicker from "./address-picker";
 
 const DeliveryMethodPicker = ({ children, onReturn, onOpen }) => {
   const [showPicker, setShowPicker] = useState(false);
-  const selectedShop = useStore("selectedShop");
   const selectedAddress = useStore("selectedAddress");
   const shipping = useStore("shipping");
 
