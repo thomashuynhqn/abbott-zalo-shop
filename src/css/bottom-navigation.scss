@@ -22,13 +22,14 @@
     .icon-img {
       height: 24px;
       width: 24px;
+      padding-bottom: 3px;
     }
   }
   .link {
     font-weight: normal;
     &.active {
       border-top: 2px solid var(--zmp-theme-color);
-      color: var(--zmp-theme-color);
+      color: black;
     }
     &.inactive {
       filter: grayscale(1);

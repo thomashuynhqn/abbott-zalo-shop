@@ -10,8 +10,8 @@ import {
 } from "zmp-framework/react";
 import { Price } from "./prices";
 import abbottIcon from "../static/icons/abbottIcon.png";
-import discount from "../static/icons/discount.svg";
-import history from "../static/icons/history.svg";
+import discount from "../static/icons/discount.png";
+import history from "../static/icons/history.png";
 import Checkout from "./checkout";
 import "../css/bottom-navigation.scss";
 
