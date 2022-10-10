@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { zmpready, App, View } from "zmp-framework/react";
 import store from "../store";
 import api from "zmp-sdk";
-import { getUser } from "../services/zalo";
+import { getUser, getPhoneNumber } from "../services/zalo";
 import BottomNavigation from "./bottom-navigation";
 
 const MyApp = () => {
@@ -23,6 +23,7 @@ const MyApp = () => {
   const init = async () => {
     await api.login();
     getUser();
+    getPhoneNumber();
   };
 
   useEffect(() => {

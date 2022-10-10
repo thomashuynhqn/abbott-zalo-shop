@@ -26,6 +26,7 @@ const store = createStore({
         name: "",
       },
     ],
+    phone: "",
     showCheckout: false,
     shipping: false,
     categories: [
@@ -198,8 +199,8 @@ const store = createStore({
     setShippingTime({ state }, value) {
       state.shippingTime = value;
     },
-    setPhone({ state }, value) {
-      state.phone = value;
+    setPhone({ state }, number) {
+      state.phone = number;
     },
     setNote({ state }, value) {
       state.note = value;

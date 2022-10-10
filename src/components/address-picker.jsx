@@ -49,6 +49,7 @@ const AddressPicker = ({ onBack }) => {
   const selectedAddress = useStore("selectedAddress");
   const selectableAddresses = useStore("addresses");
   const user = useStore("user");
+  const phoneNumber = useStore("phone");
 
   const addresses = useMemo(() => {
     if (keyword) {
@@ -88,6 +89,9 @@ const AddressPicker = ({ onBack }) => {
       onBack();
     }
   };
+
+  console.log(phoneNumber);
+  console.log(user);
 
   useEffect(() => {
     if (!name && !!user) {
@@ -135,7 +139,7 @@ const AddressPicker = ({ onBack }) => {
                   <Input
                     type="text"
                     placeholder="Nhập số điện thoại..."
-                    value={phone}
+                    value={phoneNumber}
                     onChange={(e) => setPhone(e.target.value)}
                   />
                 </div>

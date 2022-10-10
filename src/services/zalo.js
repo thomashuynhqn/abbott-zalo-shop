@@ -1,3 +1,4 @@
+import { number, string } from "prop-types";
 import { zmp } from "zmp-framework/react";
 import { zmpready } from "zmp-framework/react";
 import api from "zmp-sdk";
@@ -15,6 +16,19 @@ export const getUser = () =>
       },
     });
   });
+
+export const getPhoneNumber = () =>
+  new Promise((resolve) => {
+    api.getPhoneNumber({
+      number: "",
+      success: ({ number }) => {
+        zmpready(() => {
+          store.dispatch("setPhone", number).then(resolve);
+        });
+      },
+    });
+  });
+console.log(getPhoneNumber());
 
 export const getAccessToken = () =>
   new Promise((resolve) => {
