@@ -23,7 +23,7 @@ import store from "../store";
 import phoneIcon from "../static/icons/phone.svg";
 
 export const Address = (props) => {
-  const { name, address, selected, phone } = props;
+  const { name, address, selected, phoneNumber } = props;
   const selectAddress = () => {
     store.dispatch("selectAddress", props);
   };
@@ -36,7 +36,7 @@ export const Address = (props) => {
       <img src={delivery} className="custom-icon" />
       <div className="description">
         <Text className="mb-0" bold fontSize="16">
-          {name} - {phone}
+          {name} - {phoneNumber}
         </Text>
         <Text className="text-secondary">{address}</Text>
       </div>
@@ -77,10 +77,9 @@ const AddressPicker = ({ onBack }) => {
   const [showForm, setShowForm] = useState(false);
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
-  const [phone, setPhone] = useState("");
 
   const saveNewAddress = async () => {
-    const payload = { name, address, phone };
+    const payload = { name, address, phoneNumber };
     await saveAddress(payload);
     await store.dispatch("fetchAddresses");
     await store.dispatch("selectAddress", payload);
@@ -89,9 +88,6 @@ const AddressPicker = ({ onBack }) => {
       onBack();
     }
   };
-
-  console.log(phoneNumber);
-  console.log(user);
 
   useEffect(() => {
     if (!name && !!user) {
@@ -102,19 +98,8 @@ const AddressPicker = ({ onBack }) => {
   return (
     <>
       <ActionsGroup>
-        <Button typeName="ghost" className="close-button" onClick={onBack}>
-          <Icon zmp="zi-arrow-left" size={24}></Icon>
-        </Button>
-        <ActionsLabel bold>
-          <span className="title">Chọn địa chỉ nhận hàng</span>
-        </ActionsLabel>
-      </ActionsGroup>
-      <ActionsGroup>
         {showForm || selectableAddresses.length === 0 ? (
           <ActionsLabel className="p-0">
-            <Box className="text-left">
-              <Text bold>Thêm địa chỉ nhận hàng</Text>
-            </Box>
             <List className="my-0">
               <ListItem className="editable-info">
                 <Box slot="root-start" className="label">
@@ -140,7 +125,6 @@ const AddressPicker = ({ onBack }) => {
                     type="text"
                     placeholder="Nhập số điện thoại..."
                     value={phoneNumber}
-                    onChange={(e) => setPhone(e.target.value)}
                   />
                 </div>
               </ListItem>
@@ -158,18 +142,6 @@ const AddressPicker = ({ onBack }) => {
                     onChange={(e) => setAddress(e.target.value)}
                   />
                 </div>
-              </ListItem>
-              <ListItem className="editable-info">
-                <Button
-                  className="mb-2"
-                  fill
-                  responsive
-                  large
-                  onClick={saveNewAddress}
-                  disabled={!name || !phone || !address}
-                >
-                  Lưu địa chỉ
-                </Button>
               </ListItem>
             </List>
           </ActionsLabel>

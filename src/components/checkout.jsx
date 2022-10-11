@@ -25,6 +25,7 @@ import DeliveryMethodPicker from "./delivery-method-picker";
 import store from "../store";
 import ShippingTimePicker from "./shipping-time-picker";
 import "../css/checkout.scss";
+import AddressPicker from "./address-picker";
 
 const Checkout = ({ children, onReturn }) => {
   const showCheckout = useStore("showCheckout");
@@ -79,49 +80,9 @@ const Checkout = ({ children, onReturn }) => {
         backdrop
       >
         <Text className="section-label" bold>
-          Phương thức nhận hàng
+          Địa chỉ nhận hàng
         </Text>
-        <DeliveryMethodPicker
-          onOpen={() => setShowCheckout(false)}
-          onReturn={() => setShowCheckout(true)}
-        >
-          <List className="my-0">
-            <ListItem>
-              {shipping ? (
-                <Avatar slot="media" src={deliveryIcon} size="24" />
-              ) : (
-                <Avatar slot="media" src={shop} size="24" />
-              )}
-              <Icon slot="content" zmp="zi-chevron-right" />
-              {shipping ? (
-                <Box className="text-left">
-                  <Text bold fontSize="16">
-                    Giao tận nơi
-                  </Text>
-                  {selectedAddress ? (
-                    <>
-                      <Text bold className="mb-0">
-                        {selectedAddress.name} - {selectedAddress.phone}
-                      </Text>
-                      <Text>{selectedAddress.address}</Text>
-                    </>
-                  ) : (
-                    <Text className="text-secondary">
-                      Tài xế giao đến địa chỉ của bạn
-                    </Text>
-                  )}
-                </Box>
-              ) : (
-                <Box className="text-left">
-                  <Text bold fontSize="16">
-                    {selectedShop.name}
-                  </Text>
-                  <Text className="text-secondary">{selectedShop.address}</Text>
-                </Box>
-              )}
-            </ListItem>
-          </List>
-        </DeliveryMethodPicker>
+        <AddressPicker />
         <Text className="section-label" bold>
           Thông tin khách hàng
         </Text>

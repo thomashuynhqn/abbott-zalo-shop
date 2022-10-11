@@ -9,7 +9,6 @@ export const request = async (method, url, data) => {
   if (token) {
     headers.Authorization = `Bearer ${token}`;
   }
-
   return fetch(`${base}/${url}.json`, {
     method: method,
     body: JSON.stringify(data),
