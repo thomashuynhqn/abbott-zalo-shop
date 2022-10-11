@@ -84,7 +84,7 @@ const Checkout = ({ children, onReturn }) => {
         </Text>
         <AddressPicker />
         <Text className="section-label" bold>
-          Thông tin khách hàng
+          Thông tin thêm
         </Text>
         <List className="my-0">
           <ListItem className="editable-info">
