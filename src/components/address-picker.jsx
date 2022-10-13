@@ -1,93 +1,62 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Avatar,
-  Button,
-  Text,
   ActionsGroup,
   ActionsLabel,
-  ActionsButton,
-  Row,
-  Col,
   Icon,
-  Searchbar,
   useStore,
-  Link,
   Box,
   List,
   ListItem,
   Input,
 } from "zmp-framework/react";
-import delivery from "../static/icons/delivery.svg";
-import { saveAddress } from "../services/storage";
-import store from "../store";
+
 import phoneIcon from "../static/icons/phone.svg";
 
-export const Address = (props) => {
-  const { name, address, selected, phoneNumber } = props;
-  const selectAddress = () => {
-    store.dispatch("selectAddress", props);
+const AddressPicker = ({ onBack }) => {
+  const dataDummy = {
+    countries: [
+      {
+        name: "Germany",
+        states: [
+          {
+            name: "A",
+            cities: ["Duesseldorf", "Leinfelden-Echterdingen", "Eschborn"],
+          },
+        ],
+      },
+      { name: "Spain", states: [{ name: "B", cities: ["Barcelona"] }] },
+
+      { name: "USA", states: [{ name: "C", cities: ["Downers Grove"] }] },
+      {
+        name: "Mexico",
+        states: [{ name: ["D", "F", "H"], cities: ["Puebla"] }],
+      },
+      {
+        name: "India",
+        states: [
+          { name: "E", cities: ["Delhi", "Kolkata", "Mumbai", "Bangalore"] },
+        ],
+      },
+    ],
   };
 
-  return (
-    <ActionsButton
-      className={`bg-white ${selected ? "active" : "inactive"}`}
-      onClick={selectAddress}
-    >
-      <img src={delivery} className="custom-icon" />
-      <div className="description">
-        <Text className="mb-0" bold fontSize="16">
-          {name} - {phoneNumber}
-        </Text>
-        <Text className="text-secondary">{address}</Text>
-      </div>
-    </ActionsButton>
-  );
-};
+  const [selectedCountry, setSelectedCountry] = useState();
+  const [selectedState, setSelectedState] = useState();
+  const [selectedCity, setSelectedCity] = useState();
 
-const AddressPicker = ({ onBack }) => {
-  const [keyword, setKeyword] = useState("");
-  const selectedAddress = useStore("selectedAddress");
-  const selectableAddresses = useStore("addresses");
   const user = useStore("user");
   const phoneNumber = useStore("phone");
 
-  const addresses = useMemo(() => {
-    if (keyword) {
-      return selectableAddresses.filter((address) =>
-        `${address.name} ${address.address}`
-          .toLowerCase()
-          .includes(keyword.trim().toLowerCase())
-      );
-    } else {
-      return selectableAddresses;
-    }
-  }, [keyword, selectableAddresses]);
-  const otherAddresses = useMemo(
-    () =>
-      addresses.filter((address) => {
-        if (!selectedAddress) {
-          return addresses;
-        } else {
-          return address.address !== selectedAddress.address;
-        }
-      }),
-    [addresses]
-  );
-
-  const [showForm, setShowForm] = useState(false);
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
 
-  const saveNewAddress = async () => {
-    const payload = { name, address, phoneNumber };
-    await saveAddress(payload);
-    await store.dispatch("fetchAddresses");
-    await store.dispatch("selectAddress", payload);
-    setShowForm(false);
-    if (onBack) {
-      onBack();
-    }
-  };
+  const availableState = dataDummy.countries.find(
+    (c) => c.name === selectedCountry
+  );
+  const availableCities = availableState?.states?.find(
+    (s) => s.name === selectedState
+  );
 
   useEffect(() => {
     if (!name && !!user) {
@@ -98,124 +67,95 @@ const AddressPicker = ({ onBack }) => {
   return (
     <>
       <ActionsGroup>
-        {showForm || selectableAddresses.length === 0 ? (
-          <ActionsLabel className="p-0">
-            <List className="my-0">
-              <ListItem className="editable-info">
-                <Box slot="root-start" className="label">
-                  Tên người nhận
-                </Box>
+        <ActionsLabel className="p-0">
+          <List className="my-0">
+            <ListItem className="editable-info">
+              <Box slot="root-start" className="label">
                 <Icon slot="media" zmp="zi-user-circle" size="24" />
-                <div className="inline-input">
-                  <Input
-                    type="text"
-                    placeholder="Nhập tên người nhận..."
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                  />
-                </div>
-              </ListItem>
-              <ListItem className="editable-info">
-                <Box slot="root-start" className="label">
-                  Số điện thoại
-                </Box>
+                Tên người nhận
+              </Box>
+              <div className="inline-input">
+                <Input
+                  type="text"
+                  placeholder="Nhập tên người nhận..."
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                />
+              </div>
+            </ListItem>
+            <ListItem className="editable-info">
+              <Box slot="root-start" className="label">
                 <Avatar slot="media" src={phoneIcon} size="24" />
-                <div className="inline-input">
-                  <Input
-                    type="text"
-                    placeholder="Nhập số điện thoại..."
-                    value={phoneNumber}
-                  />
-                </div>
-              </ListItem>
-              <ListItem className="editable-info">
-                <Box slot="root-start" className="label">
-                  Địa chỉ
-                </Box>
+                Số điện thoại
+              </Box>
+
+              <div className="inline-input">
+                <Input
+                  type="text"
+                  placeholder="Nhập số điện thoại..."
+                  value={phoneNumber}
+                />
+              </div>
+            </ListItem>
+            <ListItem className="editable-info">
+              <Box slot="root-start" className="label">
                 <Icon slot="media" zmp="zi-location-solid" size="24" />
-                <div className="inline-input">
-                  <Input
-                    type="textarea"
-                    placeholder="Nhập địa chỉ..."
-                    resizable
-                    value={address}
-                    onChange={(e) => setAddress(e.target.value)}
-                  />
+                Địa chỉ
+              </Box>
+              <div className="inline-input">
+                {" "}
+                <div>
+                  <select
+                    placeholder="Country"
+                    value={selectedCountry}
+                    onChange={(e) => setSelectedCountry(e.target.value)}
+                  >
+                    <option>--Choose Country--</option>
+                    {dataDummy.countries.map((value, key) => {
+                      return (
+                        <option value={value.name} key={key}>
+                          {value.name}
+                        </option>
+                      );
+                    })}
+                  </select>
                 </div>
-              </ListItem>
-            </List>
-          </ActionsLabel>
-        ) : (
-          <>
-            <ActionsLabel bold>
-              <Searchbar
-                value={keyword}
-                onChange={(e) => setKeyword(e.target.value)}
-                type="text"
-                placeholder="Tìm địa chỉ, tên chi nhánh..."
-                clearButton
-                onSearchbarClear={() => setKeyword("")}
-              />
-            </ActionsLabel>
-            {keyword ? (
-              <>
-                <ActionsLabel className="p-0">
-                  <Box>
-                    {addresses.length ? (
-                      <Text bold className="text-left">
-                        Kết quả
-                      </Text>
-                    ) : (
-                      <Text bold>Không tìm thấy</Text>
-                    )}
-                  </Box>
-                </ActionsLabel>
-                {addresses.map((address, i) => (
-                  <Address key={i} {...address} />
-                ))}
-              </>
-            ) : (
-              <>
-                {selectedAddress && (
-                  <>
-                    <ActionsLabel className="p-0">
-                      <Box>
-                        <Row>
-                          <Col width="60" className="text-left">
-                            <Text bold className="mb-0">
-                              Địa chỉ đang chọn
-                            </Text>
-                          </Col>
-                          <Col width="40" className="text-right">
-                            <Link
-                              className="text-primary"
-                              onClick={() => setShowForm(true)}
-                            >
-                              Thêm địa chỉ mới
-                            </Link>
-                          </Col>
-                        </Row>
-                      </Box>
-                    </ActionsLabel>
-                    <Address {...selectedAddress} selected />
-                  </>
-                )}
-                {otherAddresses.length > 0 && (
-                  <>
-                    <ActionsLabel className="p-0">
-                      <Box className="text-left">
-                        <Text bold>Địa chỉ khác</Text>
-                      </Box>
-                    </ActionsLabel>
-                    {otherAddresses.map((address, i) => (
-                      <Address key={i} {...address} />
-                    ))}
-                  </>
-                )}
-              </>
-            )}
-          </>
-        )}
+                <div>
+                  <select
+                    placeholder="State"
+                    value={selectedState}
+                    onChange={(e) => setSelectedState(e.target.value)}
+                  >
+                    <option>--Choose State--</option>
+                    {availableState?.states.map((e, key) => {
+                      return (
+                        <option value={e.name} key={key}>
+                          {e.name}
+                        </option>
+                      );
+                    })}
+                  </select>
+                </div>
+                <div>
+                  <select
+                    placeholder="City"
+                    value={selectedCity}
+                    onChange={(e) => setSelectedCity(e.target.value)}
+                  >
+                    <option>--Choose City--</option>
+                    {availableCities?.cities.map((e, key) => {
+                      return (
+                        <option value={e.name} key={key}>
+                          {e}
+                        </option>
+                      );
+                    })}
+                  </select>
+                </div>
+              </div>
+            </ListItem>
+          </List>
+        </ActionsLabel>
       </ActionsGroup>
     </>
   );

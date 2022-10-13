@@ -28,7 +28,6 @@ export const getPhoneNumber = () =>
       },
     });
   });
-console.log(getPhoneNumber());
 
 export const getAccessToken = () =>
   new Promise((resolve) => {
