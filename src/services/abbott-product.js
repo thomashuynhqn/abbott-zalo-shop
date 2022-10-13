@@ -65,3 +65,13 @@ export const getPlacedOrders = async () => {
     return [];
   }
 };
+
+export const getAddress = async () => {
+  try {
+    const response = await (await request("GET", "city")).json();
+    return response.data;
+  } catch (error) {
+    console.log("Error fetching cities. Details: ", error);
+    return [];
+  }
+};

@@ -5,6 +5,7 @@ import {
   checkout,
   getPlacedOrders,
   getProductsByCategory,
+  getAddress,
   login,
 } from "./services/abbott-product";
 import {
@@ -227,11 +228,8 @@ const store = createStore({
       state.loadingOrders = false;
     },
     async fetchAddresses({ state }) {
-      const addresses = await loadAddresses();
+      const addresses = await getAddress();
       state.addresses = addresses;
-      if (!state.selectedAddress && addresses.length > 0) {
-        state.selectedAddress = addresses[addresses.length - 1];
-      }
     },
     async checkout({ state }) {
       const {

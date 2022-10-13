@@ -10,17 +10,58 @@ import {
   ListItem,
   Input,
 } from "zmp-framework/react";
-
+import store from "../store";
 import phoneIcon from "../static/icons/phone.svg";
 
 const AddressPicker = ({ onBack }) => {
   const dataDummy = {
     countries: [
       {
-        name: "Germany",
+        name: "Tỉnh Thái Bình",
         states: [
           {
-            name: "A",
+            name: "Huyện Thái Thụy",
+            cities: [
+              "Thị trấn Diêm Điền",
+              "Xã  Mỹ Lộc",
+              "Xã An Tân",
+              "Xã Dương Hồng  Thủy",
+              "Xã Dương Phúc",
+              "Xã Hòa An",
+              "Xã Hồng Dũng",
+              "Xã Sơn Hà",
+              "Xã Tân Học",
+              "Xã Thái Đô",
+              "Xã Thái Giang",
+              "Xã Thái Hưng",
+              "Xã Thái Nguyên",
+              "Xã Thái Phúc",
+              "Xã Thái Thịnh",
+              "Xã Thái Thọ",
+              "Xã Thái Thượng",
+              "Xã Thái Xuyên",
+              "Xã Thuần Thành",
+              "Xã Thụy Bình",
+              "Xã Thụy Chính",
+              "Xã Thụy Dân",
+              "Xã Thụy Duyên",
+              "Xã Thụy Hải",
+              "Xã Thụy Hưng",
+              "Xã Thụy Liên",
+              "Xã Thụy Ninh",
+              "Xã Thụy Phong",
+              "Xã Thụy Quỳnh",
+              "Xã Thụy Sơn",
+              "Xã Thụy Thanh",
+              "Xã Thụy Trình",
+              "Xã Thụy Trường",
+              "Xã Thụy Văn",
+              "Xã Thụy Việt",
+              "Xã Thụy Xuân",
+            ],
+          },
+          {
+            name: "Huyện Đông Hưng",
             cities: ["Duesseldorf", "Leinfelden-Echterdingen", "Eschborn"],
           },
         ],
@@ -47,9 +88,10 @@ const AddressPicker = ({ onBack }) => {
 
   const user = useStore("user");
   const phoneNumber = useStore("phone");
+  const address = useStore("addresses");
+  console.log(address);
 
   const [name, setName] = useState("");
-  const [address, setAddress] = useState("");
 
   const availableState = dataDummy.countries.find(
     (c) => c.name === selectedCountry
@@ -63,6 +105,10 @@ const AddressPicker = ({ onBack }) => {
       setName(user.name);
     }
   }, [user]);
+
+  useEffect(() => {
+    store.dispatch("fetchAddresses");
+  }, []);
 
   return (
     <>
