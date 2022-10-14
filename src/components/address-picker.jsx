@@ -13,92 +13,19 @@ import {
 import store from "../store";
 import phoneIcon from "../static/icons/phone.svg";
 
-const AddressPicker = ({ onBack }) => {
-  const dataDummy = {
-    countries: [
-      {
-        name: "Tỉnh Thái Bình",
-        states: [
-          {
-            name: "Huyện Thái Thụy",
-            cities: [
-              "Thị trấn Diêm Điền",
-              "Xã  Mỹ Lộc",
-              "Xã An Tân",
-              "Xã Dương Hồng  Thủy",
-              "Xã Dương Phúc",
-              "Xã Hòa An",
-              "Xã Hồng Dũng",
-              "Xã Sơn Hà",
-              "Xã Tân Học",
-              "Xã Thái Đô",
-              "Xã Thái Giang",
-              "Xã Thái Hưng",
-              "Xã Thái Nguyên",
-              "Xã Thái Phúc",
-              "Xã Thái Thịnh",
-              "Xã Thái Thọ",
-              "Xã Thái Thượng",
-              "Xã Thái Xuyên",
-              "Xã Thuần Thành",
-              "Xã Thụy Bình",
-              "Xã Thụy Chính",
-              "Xã Thụy Dân",
-              "Xã Thụy Duyên",
-              "Xã Thụy Hải",
-              "Xã Thụy Hưng",
-              "Xã Thụy Liên",
-              "Xã Thụy Ninh",
-              "Xã Thụy Phong",
-              "Xã Thụy Quỳnh",
-              "Xã Thụy Sơn",
-              "Xã Thụy Thanh",
-              "Xã Thụy Trình",
-              "Xã Thụy Trường",
-              "Xã Thụy Văn",
-              "Xã Thụy Việt",
-              "Xã Thụy Xuân",
-            ],
-          },
-          {
-            name: "Huyện Đông Hưng",
-            cities: ["Duesseldorf", "Leinfelden-Echterdingen", "Eschborn"],
-          },
-        ],
-      },
-      { name: "Spain", states: [{ name: "B", cities: ["Barcelona"] }] },
-
-      { name: "USA", states: [{ name: "C", cities: ["Downers Grove"] }] },
-      {
-        name: "Mexico",
-        states: [{ name: ["D", "F", "H"], cities: ["Puebla"] }],
-      },
-      {
-        name: "India",
-        states: [
-          { name: "E", cities: ["Delhi", "Kolkata", "Mumbai", "Bangalore"] },
-        ],
-      },
-    ],
-  };
-
-  const [selectedCountry, setSelectedCountry] = useState();
-  const [selectedState, setSelectedState] = useState();
-  const [selectedCity, setSelectedCity] = useState();
+const AddressPicker = () => {
+  const [province, setProvince] = useState();
+  const [district, setDistrict] = useState();
+  const [ward, setWard] = useState();
+  const [name, setName] = useState("");
 
   const user = useStore("user");
   const phoneNumber = useStore("phone");
   const address = useStore("addresses");
-  console.log(address);
 
-  const [name, setName] = useState("");
+  const pickDistrict = address.find((p) => p.province === province);
 
-  const availableState = dataDummy.countries.find(
-    (c) => c.name === selectedCountry
-  );
-  const availableCities = availableState?.states?.find(
-    (s) => s.name === selectedState
-  );
+  const pickWard = pickDistrict?.states?.find((s) => s.district === district);
 
   useEffect(() => {
     if (!name && !!user) {
@@ -149,18 +76,16 @@ const AddressPicker = ({ onBack }) => {
                 Địa chỉ
               </Box>
               <div className="inline-input">
-                {" "}
                 <div>
                   <select
-                    placeholder="Country"
-                    value={selectedCountry}
-                    onChange={(e) => setSelectedCountry(e.target.value)}
+                    value={province}
+                    onChange={(e) => setProvince(e.target.value)}
                   >
-                    <option>--Choose Country--</option>
-                    {dataDummy.countries.map((value, key) => {
+                    <option>-- Chọn Tỉnh --</option>
+                    {address.map((value, key) => {
                       return (
-                        <option value={value.name} key={key}>
-                          {value.name}
+                        <option value={value.province} key={key}>
+                          {value.province}
                         </option>
                       );
                     })}
@@ -168,15 +93,14 @@ const AddressPicker = ({ onBack }) => {
                 </div>
                 <div>
                   <select
-                    placeholder="State"
-                    value={selectedState}
-                    onChange={(e) => setSelectedState(e.target.value)}
+                    value={district}
+                    onChange={(e) => setDistrict(e.target.value)}
                   >
-                    <option>--Choose State--</option>
-                    {availableState?.states.map((e, key) => {
+                    <option>-- Chọn Quận/Huyện --</option>
+                    {pickDistrict?.states.map((e, key) => {
                       return (
-                        <option value={e.name} key={key}>
-                          {e.name}
+                        <option value={e.district} key={key}>
+                          {e.district}
                         </option>
                       );
                     })}
@@ -184,14 +108,13 @@ const AddressPicker = ({ onBack }) => {
                 </div>
                 <div>
                   <select
-                    placeholder="City"
-                    value={selectedCity}
-                    onChange={(e) => setSelectedCity(e.target.value)}
+                    value={ward}
+                    onChange={(e) => setWard(e.target.value)}
                   >
-                    <option>--Choose City--</option>
-                    {availableCities?.cities.map((e, key) => {
+                    <option>-- Chọn Phường/Xã --</option>
+                    {pickWard?.ward.map((e, key) => {
                       return (
-                        <option value={e.name} key={key}>
+                        <option value={e.district} key={key}>
                           {e}
                         </option>
                       );
