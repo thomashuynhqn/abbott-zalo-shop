@@ -1,13 +1,5 @@
 import React, { useState, useMemo, useEffect } from "react";
-import {
-  Box,
-  Input,
-  Col,
-  Title,
-  Row,
-  SkeletonBlock,
-  useStore,
-} from "zmp-framework/react";
+import { Box, Input, Col, Title, Row, useStore } from "zmp-framework/react";
 
 import store from "../store";
 import Product from "./product";

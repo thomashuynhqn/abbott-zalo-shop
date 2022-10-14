@@ -18,6 +18,7 @@ const AddressPicker = () => {
   const [district, setDistrict] = useState();
   const [ward, setWard] = useState();
   const [name, setName] = useState("");
+  const [inputAddress, setInputAddress] = useState("");
 
   const user = useStore("user");
   const phoneNumber = useStore("phone");
@@ -76,6 +77,13 @@ const AddressPicker = () => {
                 Địa chỉ
               </Box>
               <div className="inline-input">
+                <Input
+                  type="textarea"
+                  placeholder="Nhập địa chỉ..."
+                  resizable
+                  value={inputAddress}
+                  onChange={(e) => setInputAddress(e.target.value)}
+                />
                 <div>
                   <select
                     value={province}
