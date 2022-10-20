@@ -1,4 +1,3 @@
-import { number, string } from "prop-types";
 import { zmp } from "zmp-framework/react";
 import { zmpready } from "zmp-framework/react";
 import api from "zmp-sdk";

@@ -61,8 +61,8 @@ export const getPlacedOrders = async () => {
 
 export const getAddress = async () => {
   try {
-    const response = await (await request("GET", "address")).json();
-    return response;
+    const response = await (await request("GET", "city")).json();
+    return response.data;
   } catch (error) {
     return false;
   }
