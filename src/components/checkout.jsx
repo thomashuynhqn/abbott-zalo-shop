@@ -36,7 +36,6 @@ const Checkout = ({ children, onReturn }) => {
   const selectedAddress = useStore("selectedAddress");
   const cart = useStore("cart");
   const totalAmount = useStore("totalAmount");
-  const shipping = useStore("shipping");
 
   const [show, setShow] = useState(false);
   useEffect(() => setShow(showCheckout), [showCheckout]);
@@ -54,12 +53,7 @@ const Checkout = ({ children, onReturn }) => {
     setLoading(false);
   };
 
-  const shippingTime = useStore("shippingTime");
   const note = useStore("note");
-
-  const changeShippingTime = () => {
-    document.querySelector("#shipping-time-picker").click();
-  };
 
   const [agree, setAgree] = useState(true);
 

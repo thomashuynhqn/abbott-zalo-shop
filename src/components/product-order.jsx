@@ -162,23 +162,6 @@ const ProductOrder = ({ product, children, cartItem, cartIndex }) => {
             </ListItem>
           </List>
         </Box>
-        <Box m={0} textAlign="left">
-          <Box className="section-label">
-            <Text bold>Ghi chú</Text>
-          </Box>
-          <List className="my-0">
-            <ListItem>
-              <div className="note">
-                <Input
-                  value={note}
-                  onChange={(e) => setNote(e.target.value)}
-                  type="text"
-                  placeholder="Nhập ghi chú..."
-                />
-              </div>
-            </ListItem>
-          </List>
-        </Box>
         <Box p={3} className="sticky-action-footer">
           <Row>
             <Col>

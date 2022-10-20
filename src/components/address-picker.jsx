@@ -83,6 +83,7 @@ const AddressPicker = () => {
                   resizable
                   value={inputAddress}
                   onChange={(e) => setInputAddress(e.target.value)}
+                  required
                 />
                 <div>
                   <select

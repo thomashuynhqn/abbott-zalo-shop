@@ -1,5 +1,4 @@
 import { createStore } from "zmp-core/lite";
-
 import { zmp } from "zmp-framework/react";
 import {
   checkout,
@@ -9,7 +8,6 @@ import {
   login,
 } from "./services/abbott-product";
 import {
-  loadAddresses,
   loadProductsFromCache,
   loadUserFromCache,
   saveProductsToCache,
@@ -112,9 +110,6 @@ const store = createStore({
     totalAmount({ state }) {
       return state.cart.reduce((total, item) => total + item.subtotal, 0);
     },
-    shipping({ state }) {
-      return state.shipping;
-    },
     showCheckout({ state }) {
       return state.showCheckout;
     },
@@ -129,12 +124,6 @@ const store = createStore({
     },
     loadingOrders({ state }) {
       return state.loadingOrders;
-    },
-    address({ state }) {
-      return state.address;
-    },
-    shippingTime({ state }) {
-      return state.shippingTime;
     },
     phone({ state }) {
       return state.phone;
@@ -197,9 +186,6 @@ const store = createStore({
     setAddress({ state }, value) {
       state.address = value;
     },
-    setShippingTime({ state }, value) {
-      state.shippingTime = value;
-    },
     setPhone({ state }, number) {
       state.phone = number;
     },
@@ -232,25 +218,12 @@ const store = createStore({
       state.addresses = addresses;
     },
     async checkout({ state }) {
-      const {
-        cart,
-        selectedDiscount,
-        shipping,
-        selectedAddress,
-        shippingTime,
-        note,
-      } = state;
-      let shop = null;
-      if (!shipping) {
-        shop = state.shops.find((s) => s.selected);
-      }
+      const { cart, selectedDiscount, addresses, note } = state;
+
       const result = await checkout({
         cart,
         selectedDiscount,
-        shipping,
-        shop,
-        address: selectedAddress,
-        shippingTime,
+        address: addresses,
         note,
       });
       if (!result.error) {

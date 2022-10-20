@@ -1,5 +1,5 @@
-import config from "../config";
 import store from "../store";
+import api from "zmp-sdk";
 
 const base = "https://api.3anutrition.com";
 
@@ -18,17 +18,10 @@ export const request = async (method, url, data) => {
 
 export const login = async (accessToken) => {
   try {
-    const response = await (
-      await request("POST", "user", {
-        accessToken,
-      })
-    ).json();
-    if (response.data.jwt) {
-      store.dispatch("setJwt", response.data.jwt);
-      return true;
-    } else {
-      return false;
-    }
+    const response = await api.login({
+      accessToken,
+    });
+    return response.data;
   } catch (error) {
     console.log("Error logging in. Details: ", error);
     return false;
@@ -68,10 +61,9 @@ export const getPlacedOrders = async () => {
 
 export const getAddress = async () => {
   try {
-    const response = await (await request("GET", "city")).json();
-    return response.data;
+    const response = await (await request("GET", "address")).json();
+    return response;
   } catch (error) {
-    console.log("Error fetching cities. Details: ", error);
-    return [];
+    return false;
   }
 };
