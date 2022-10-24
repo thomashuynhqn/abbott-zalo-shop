@@ -15,21 +15,21 @@ import store from "../store";
 import phoneIcon from "../static/icons/phone.svg";
 
 const AddressPicker = () => {
-  const [province, setProvince] = useState();
-  const [district, setDistrict] = useState();
+  // const [province, setProvince] = useState();
+  // const [district, setDistrict] = useState();
   // const [ward, setWard] = useState();
   const [name, setName] = useState("");
   const [inputAddress, setInputAddress] = useState("");
 
   const user = useStore("user");
   const phoneNumber = useStore("phone");
-  const provinces = useStore("province");
-  const districts = useStore("district");
+  // const provinces = useStore("province");
+  // const districts = useStore("district");
 
-  useEffect(() => {
-    store.dispatch("fetchProvince");
-    store.dispatch("fetchDistrict");
-  }, []);
+  // useEffect(() => {
+  //   store.dispatch("fetchProvince");
+  //   store.dispatch("fetchDistrict");
+  // }, []);
 
   useEffect(() => {
     if (!name && !!user) {
@@ -37,7 +37,7 @@ const AddressPicker = () => {
     }
   }, [user]);
 
-  const pickDistrict = provinces.find((p) => p === province);
+  // const pickDistrict = provinces.find((p) => p === province);
 
   // const pickWard = pickDistrict?.states?.find((s) => s.district === district);
 
