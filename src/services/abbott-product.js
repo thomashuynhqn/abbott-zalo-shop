@@ -59,10 +59,26 @@ export const getPlacedOrders = async () => {
   }
 };
 
-export const getAddress = async () => {
+export const getProvince = async () => {
   try {
-    const response = await (await request("GET", "city")).json();
-    return response.data;
+    const response = await fetch(
+      "https://api.3anutrition.com/api/citylist?city=0&district=0"
+    );
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.log("Error fetching products. Details: ", error);
+    return [];
+  }
+};
+
+export const getDistrict = async () => {
+  try {
+    const response = await fetch(
+      "https://api.3anutrition.com/api/citylist?city=T%E1%BB%89nh%20Th%C3%A1i%20B%C3%ACnh&district=0"
+    );
+    const data = await response.json();
+    return data;
   } catch (error) {
     return false;
   }

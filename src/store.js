@@ -4,8 +4,9 @@ import {
   checkout,
   getPlacedOrders,
   getProductsByCategory,
-  getAddress,
   login,
+  getProvince,
+  getDistrict,
 } from "./services/abbott-product";
 import {
   loadProductsFromCache,
@@ -72,7 +73,9 @@ const store = createStore({
       },
     ],
     selectedDiscount: null,
-    addresses: [],
+    province: [],
+    district: [],
+    ward: [],
     shippingTime: [new Date(), new Date().getHours(), new Date().getMinutes()],
     note: "",
   },
@@ -131,10 +134,14 @@ const store = createStore({
     note({ state }) {
       return state.note;
     },
-    addresses({ state }) {
-      return state.addresses;
+    province({ state }) {
+      return state.province;
+    },
+    district({ state }) {
+      return state.district;
     },
   },
+
   actions: {
     selectShop({ state }, name) {
       state.shops = state.shops.map((shop) => ({
@@ -213,17 +220,21 @@ const store = createStore({
       state.orders = orders;
       state.loadingOrders = false;
     },
-    async fetchAddresses({ state }) {
-      const addresses = await getAddress();
-      state.addresses = addresses;
+    async fetchProvince({ state }) {
+      const provinces = await getProvince();
+      state.province = provinces;
+    },
+    async fetchDistrict({ state }) {
+      const districts = await getDistrict();
+      state.province = districts;
     },
     async checkout({ state }) {
-      const { cart, selectedDiscount, addresses, note } = state;
+      const { cart, selectedDiscount, province, note } = state;
 
       const result = await checkout({
         cart,
         selectedDiscount,
-        address: addresses,
+        address: province,
         note,
       });
       if (!result.error) {

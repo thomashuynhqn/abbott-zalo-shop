@@ -10,23 +10,26 @@ import {
   ListItem,
   Input,
 } from "zmp-framework/react";
+import LocationForm from "./location";
 import store from "../store";
 import phoneIcon from "../static/icons/phone.svg";
 
 const AddressPicker = () => {
   const [province, setProvince] = useState();
   const [district, setDistrict] = useState();
-  const [ward, setWard] = useState();
+  // const [ward, setWard] = useState();
   const [name, setName] = useState("");
   const [inputAddress, setInputAddress] = useState("");
 
   const user = useStore("user");
   const phoneNumber = useStore("phone");
-  const address = useStore("addresses");
+  const provinces = useStore("province");
+  const districts = useStore("district");
 
-  const pickDistrict = address.find((p) => p.province === province);
-
-  const pickWard = pickDistrict?.states?.find((s) => s.district === district);
+  useEffect(() => {
+    store.dispatch("fetchProvince");
+    store.dispatch("fetchDistrict");
+  }, []);
 
   useEffect(() => {
     if (!name && !!user) {
@@ -34,9 +37,9 @@ const AddressPicker = () => {
     }
   }, [user]);
 
-  useEffect(() => {
-    store.dispatch("fetchAddresses");
-  }, []);
+  const pickDistrict = provinces.find((p) => p === province);
+
+  // const pickWard = pickDistrict?.states?.find((s) => s.district === district);
 
   return (
     <>
@@ -85,16 +88,17 @@ const AddressPicker = () => {
                   onChange={(e) => setInputAddress(e.target.value)}
                   required
                 />
-                <div>
+                <LocationForm />
+                {/* <div>
                   <select
                     value={province}
                     onChange={(e) => setProvince(e.target.value)}
                   >
                     <option>-- Chọn Tỉnh --</option>
-                    {address.map((value, key) => {
+                    {provinces.map((value, key) => {
                       return (
-                        <option value={value.province} key={key}>
-                          {value.province}
+                        <option value={value} key={key}>
+                          {value}
                         </option>
                       );
                     })}
@@ -106,10 +110,10 @@ const AddressPicker = () => {
                     onChange={(e) => setDistrict(e.target.value)}
                   >
                     <option>-- Chọn Quận/Huyện --</option>
-                    {pickDistrict?.states.map((e, key) => {
+                    {pickDistrict.map((e, key) => {
                       return (
-                        <option value={e.district} key={key}>
-                          {e.district}
+                        <option value={e} key={key}>
+                          {e}
                         </option>
                       );
                     })}
@@ -129,7 +133,7 @@ const AddressPicker = () => {
                       );
                     })}
                   </select>
-                </div>
+                </div> */}
               </div>
             </ListItem>
           </List>
