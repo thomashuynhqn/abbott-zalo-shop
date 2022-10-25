@@ -2,6 +2,8 @@ import store from "../store";
 import api from "zmp-sdk";
 
 const base = "https://api.3anutrition.com";
+const districts =
+  "https://raw.githubusercontent.com/nhidh99/codergamo/master/004-location-selects/locations/districts";
 
 export const request = async (method, url, data) => {
   const headers = { "Content-Type": "application/json" };
@@ -59,27 +61,27 @@ export const getPlacedOrders = async () => {
   }
 };
 
-export const getProvince = async () => {
-  try {
-    const response = await fetch(
-      "https://api.3anutrition.com/api/citylist?city=0&district=0"
-    );
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.log("Error fetching products. Details: ", error);
-    return [];
-  }
-};
+// export const getProvince = async () => {
+//   try {
+//     const response = await fetch(
+//       "https://raw.githubusercontent.com/nhidh99/codergamo/master/004-location-selects/locations/cities.json"
+//     );
+//     const data = await response.json();
+//     return data.data;
+//   } catch (error) {
+//     console.log("Error fetching products. Details: ", error);
+//     return [];
+//   }
+// };
 
-export const getDistrict = async () => {
-  try {
-    const response = await fetch(
-      "https://api.3anutrition.com/api/citylist?city=T%E1%BB%89nh%20Th%C3%A1i%20B%C3%ACnh&district=0"
-    );
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    return false;
-  }
-};
+// export const getDistrict = async (locationId) => {
+//   try {
+//     const { cityId, districtId, wardId } = (await axios.get(PATHS.LOCATION))
+//       .data;
+//     const response = await fetch(`${districts}/${locationId}.json`);
+//     const data = await response.json();
+//     return data.data;
+//   } catch (error) {
+//     return false;
+//   }
+// };

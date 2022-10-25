@@ -1,7 +1,7 @@
 import React from "react";
 import useLocationForm from "../services/fetchLocation";
 import Select from "react-select";
-import "../css/location.scss";
+
 import { ListInput } from "zmp-framework/react";
 
 const LocationForm = () => {

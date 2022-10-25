@@ -5,8 +5,8 @@ import {
   getPlacedOrders,
   getProductsByCategory,
   login,
-  getProvince,
-  getDistrict,
+  // getProvince,
+  // getDistrict,
 } from "./services/abbott-product";
 import {
   loadProductsFromCache,
