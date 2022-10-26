@@ -182,3 +182,7 @@
   padding-top: 0.16rem;
   padding-bottom: 0.16rem;
 }
+
+.actions-group:not(:first-child) {
+  border-top: none !important;
+}
