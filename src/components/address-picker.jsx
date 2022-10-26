@@ -50,10 +50,9 @@ const AddressPicker = () => {
   // const provinces = useStore("province");
   // const districts = useStore("district");
 
-  // useEffect(() => {
-  //   store.dispatch("fetchProvince");
-  //   store.dispatch("fetchDistrict");
-  // }, []);
+  useEffect(() => {
+    setInputAddress();
+  }, [inputAddress]);
 
   useEffect(() => {
     if (!name && !!user) {
@@ -105,6 +104,17 @@ const AddressPicker = () => {
               </Box>
               <div className="inline-input">
                 <div className="select-wrapper">
+                  <Input
+                    type="text"
+                    clearButton
+                    placeholder="Nhập địa chỉ..."
+                    resizable
+                    value={inputAddress}
+                    onChange={(e) => setInputAddress(e.target.value)}
+                    required
+                    errorMessage="Vui lòng điền thông tin địa chỉ"
+                    validate
+                  />
                   <Select
                     classNamePrefix={"my-custom-react-select"}
                     name="cityId"
@@ -115,7 +125,7 @@ const AddressPicker = () => {
                     placeholder="Tỉnh/Thành"
                     defaultValue={selectedCity}
                     styles={customStyles}
-                    menuPlacement="auto"
+                    menuPlacement="top"
                   />
                   <Select
                     classNamePrefix={"my-custom-react-select"}
@@ -127,7 +137,7 @@ const AddressPicker = () => {
                     placeholder="Quận/Huyện"
                     defaultValue={selectedDistrict}
                     styles={customStyles}
-                    menuPlacement="auto"
+                    menuPlacement="top"
                   />
 
                   <Select
@@ -140,17 +150,10 @@ const AddressPicker = () => {
                     onChange={(option) => onWardSelect(option)}
                     defaultValue={selectedWard}
                     styles={customStyles}
-                    menuPlacement="auto"
+                    menuPlacement="top"
                   />
                 </div>
-                <Input
-                  type="textarea"
-                  placeholder="Nhập địa chỉ..."
-                  resizable
-                  value={inputAddress}
-                  onChange={(e) => setInputAddress(e.target.value)}
-                  required
-                />
+
                 {/* <LocationForm /> */}
                 {/* <div>
                   <select
